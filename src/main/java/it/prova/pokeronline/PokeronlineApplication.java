@@ -48,7 +48,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.username("admin")
 					.password("admin")
 					.dataRegistrazione(LocalDate.of(2002, 8, 10))
-					.esperienzaAccumulata(2)
+					.esperienzaAccumulata(3)
 					.creditoAccumulato(250)
 					.build();
 			admin.getRuoli().add(ruoloServiceInstance.cercaPerDescrizioneECodice("Administrator", Ruolo.ROLE_ADMIN));
@@ -63,7 +63,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.username("user")
 					.password("user")
 					.dataRegistrazione(LocalDate.of(2002, 8, 10))
-					.esperienzaAccumulata(2)
+					.esperienzaAccumulata(1)
 					.creditoAccumulato(250)
 					.build();
 			classicUser.getRuoli()
@@ -79,7 +79,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.username("user1")
 					.password("user1")
 					.dataRegistrazione(LocalDate.of(2002, 8, 10))
-					.esperienzaAccumulata(2)
+					.esperienzaAccumulata(0)
 					.creditoAccumulato(250)
 					.build();
 			classicUser1.getRuoli()
