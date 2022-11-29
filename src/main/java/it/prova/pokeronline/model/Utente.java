@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -56,14 +55,20 @@ public class Utente {
 	@Enumerated(EnumType.STRING)
 	private StatoUtente stato;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "utenteCheCreaIlTavolo")
-	private List<Tavolo> tavoliCreati = new ArrayList<>();
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tavoloACuiStoGiocando_id")
 	private Tavolo tavoloACuiStoGiocando;
 	
+	@Builder.Default
 	@ManyToMany
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
 	private List<Ruolo> ruoli = new ArrayList<>();
+	
+	public boolean isAttivo() {
+		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);
+	}
+
+	public boolean isDisabilitato() {
+		return this.stato != null && this.stato.equals(StatoUtente.DISABILITATO);
+	}
 }

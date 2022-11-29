@@ -44,6 +44,7 @@ public class Tavolo {
 	@JoinColumn(name = "utentechecreailtavolo_id", nullable = false)
 	private Utente utenteCheCreaIlTavolo;
 	
+	@Builder.Default
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tavoloACuiStoGiocando")
 	private List<Utente> utentiAlTavolo = new ArrayList<>();
 }
