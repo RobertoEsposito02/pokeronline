@@ -2,6 +2,7 @@ package it.prova.pokeronline.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,7 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +44,8 @@ public class Utente {
 	private String username;
 	@Column(name = "password")
 	private String password;
+	@Column(name = "datecreated")
+	private Date dateCreated;
 	@Column(name = "dataregistrazione")
 	private LocalDate dataRegistrazione;
 	@Column(name = "esperienzaaccumulata")
