@@ -52,6 +52,8 @@ public class Utente {
 	private Integer esperienzaAccumulata;
 	@Column(name = "creditoaccumulato")
 	private Integer creditoAccumulato;
+	@Column(name = "email")
+	private String email;
 	
 	@Enumerated(EnumType.STRING)
 	private StatoUtente stato;

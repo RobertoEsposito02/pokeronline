@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import it.prova.pokeronline.dto.utente.UtenteDTO;
@@ -29,7 +28,6 @@ public class TavoloDTO {
 	@NotBlank
 	private String denominazione;
 	private LocalDate dataCreazione;
-	@NotNull
 	private UtenteDTO utenteCheCreaIlTavolo;
 	
 	@Builder.Default

@@ -8,6 +8,8 @@ public interface TavoloService {
 	public List<Tavolo> listAll();
 	
 	public List<Tavolo> listAllByEsperienzaAccumulata();
+	
+	public List<Tavolo> listAllByMyCreati();
 
 	public Tavolo caricaSingoloElemento(Long id);
 	

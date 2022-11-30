@@ -14,4 +14,7 @@ public interface TavoloRepository extends CrudRepository<Tavolo, Long>{
 	
 	@Query("from Tavolo t where t.esperienzaMinima <= :esperienzaMinima")
 	List<Tavolo> listAllByEsperienzaMinima(Integer esperienzaMinima);
+	
+	@Query("from Tavolo t left join fetch t.utenteCheCreaIlTavolo u where u.id = :id")
+	List<Tavolo> listAllByMyCreati(Long id);
 }

@@ -45,6 +45,8 @@ public class UtenteDTO {
 	private StatoUtente stato;
 	private Long[] ruoliIds;
 	private LocalDate dataRegistrazione;
+	@NotBlank
+	private String email;
 	@Positive
 	private Integer esperienzaAccumulata;
 	@Positive
@@ -61,6 +63,7 @@ public class UtenteDTO {
 				.dataRegistrazione(dataRegistrazione)
 				.esperienzaAccumulata(esperienzaAccumulata)
 				.creditoAccumulato(creditoAccumulato)
+				.email(email)
 				.stato(stato)
 				.build();
 		if (includeIdRoles && ruoliIds != null)
@@ -79,6 +82,7 @@ public class UtenteDTO {
 				.dataRegistrazione(utenteModel.getDataRegistrazione())
 				.esperienzaAccumulata(utenteModel.getEsperienzaAccumulata())
 				.creditoAccumulato(utenteModel.getCreditoAccumulato())
+				.email(utenteModel.getEmail())
 				.stato(utenteModel.getStato())
 				.build();
 		if (!utenteModel.getRuoli().isEmpty())

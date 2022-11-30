@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.pokeronline.dto.tavolo.TavoloDTO;
 import it.prova.pokeronline.model.Tavolo;
+import it.prova.pokeronline.repository.utente.UtenteRepository;
 import it.prova.pokeronline.service.tavolo.TavoloService;
 import it.prova.pokeronline.web.api.exception.IdNotNullForInsertException;
 import it.prova.pokeronline.web.api.exception.IdNullForUpdateException;
@@ -82,5 +83,10 @@ public class TavoloController {
 	@GetMapping("/cercaTavolo")
 	public List<TavoloDTO> listAllByEsperienzaAccumulata(){
 		return TavoloDTO.createListDTOFromModel(tavoloService.listAllByEsperienzaAccumulata());
+	}
+	
+	@GetMapping("/cercaTavoliCreatiDaMe")
+	public List<TavoloDTO> listAllByMyCreati(){
+		return TavoloDTO.createListDTOFromModel(tavoloService.listAllByMyCreati());
 	}
 }
