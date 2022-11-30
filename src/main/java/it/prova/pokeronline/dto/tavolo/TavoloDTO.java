@@ -3,10 +3,11 @@ package it.prova.pokeronline.dto.tavolo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import it.prova.pokeronline.dto.utente.UtenteDTO;
 import it.prova.pokeronline.model.Tavolo;
@@ -21,9 +22,9 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 public class TavoloDTO {
 	private Long id;
-	@Positive
+	@PositiveOrZero
 	private Integer esperienzaMinima;
-	@Positive
+	@PositiveOrZero
 	private Integer cifraMinima;
 	@NotBlank
 	private String denominazione;
@@ -59,5 +60,17 @@ public class TavoloDTO {
 				.build();
 				
 		return result;
+	}
+	
+	public static List<TavoloDTO> createListDTOFromModel(List<Tavolo> tavoloListModel){
+		return tavoloListModel.stream().map(tavolo -> {
+			return TavoloDTO.buildTavoloDTOFromModel(tavolo);
+		}).collect(Collectors.toList());
+	}
+	
+	public static List<Tavolo> createListModelFromDTO(List<TavoloDTO> tavoloListDTO){
+		return tavoloListDTO.stream().map(tavolo -> {
+			return tavolo.buildTavoloModel();
+		}).collect(Collectors.toList());
 	}
 }

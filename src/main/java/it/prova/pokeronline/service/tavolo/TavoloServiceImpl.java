@@ -1,5 +1,6 @@
 package it.prova.pokeronline.service.tavolo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class TavoloServiceImpl implements TavoloService{
 	@Override
 	@Transactional
 	public void inserisciNuovo(Tavolo tavoloInstance) {
+		tavoloInstance.setDataCreazione(LocalDate.now());
+		if(tavoloInstance.getCifraMinima() == null)
+			tavoloInstance.setCifraMinima(0);
 		repository.save(tavoloInstance);
 	}
 
@@ -41,6 +45,11 @@ public class TavoloServiceImpl implements TavoloService{
 	@Transactional
 	public void rimuovi(Long idToRemove) {
 		repository.deleteById(idToRemove);
+	}
+
+	@Override
+	public Tavolo caricaSingoloElementoEager(Long id) {
+		return repository.findIdByEager(id);
 	}
 	
 	

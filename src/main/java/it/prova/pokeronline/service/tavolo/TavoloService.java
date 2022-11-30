@@ -8,6 +8,8 @@ public interface TavoloService {
 	public List<Tavolo> listAll();
 
 	public Tavolo caricaSingoloElemento(Long id);
+	
+	public Tavolo caricaSingoloElementoEager(Long id);
 
 	public void aggiorna(Tavolo tavoloInstance);
 
