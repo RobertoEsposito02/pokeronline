@@ -6,6 +6,8 @@ import it.prova.pokeronline.model.Tavolo;
 
 public interface TavoloService {
 	public List<Tavolo> listAll();
+	
+	public List<Tavolo> listAllByEsperienzaAccumulata();
 
 	public Tavolo caricaSingoloElemento(Long id);
 	

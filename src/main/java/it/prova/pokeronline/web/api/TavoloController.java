@@ -75,4 +75,9 @@ public class TavoloController {
 		
 		tavoloService.rimuovi(id);
 	}
+	
+	@GetMapping("/cercaTavolo")
+	public List<TavoloDTO> listAllByEsperienzaAccumulata(){
+		return TavoloDTO.createListDTOFromModel(tavoloService.listAllByEsperienzaAccumulata());
+	}
 }

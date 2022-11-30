@@ -71,7 +71,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.creditoAccumulato(250)
 					.build();
 			classicUser.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", Ruolo.ROLE_PLAYER));
+					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic Player", Ruolo.ROLE_PLAYER));
 			utenteServiceInstance.inserisciNuovo(classicUser);
 			utenteServiceInstance.changeUserAbilitation(classicUser.getId());
 		}
@@ -87,7 +87,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.creditoAccumulato(250)
 					.build();
 			classicUser1.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", Ruolo.ROLE_PLAYER));
+					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic Player", Ruolo.ROLE_PLAYER));
 			utenteServiceInstance.inserisciNuovo(classicUser1);
 			utenteServiceInstance.changeUserAbilitation(classicUser1.getId());
 		}
@@ -103,13 +103,12 @@ public class PokeronlineApplication implements CommandLineRunner {
 					.creditoAccumulato(250)
 					.build();
 			classicUser2.getRuoli()
-					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Classic User", Ruolo.ROLE_SPECIAL_PLAYER));
+					.add(ruoloServiceInstance.cercaPerDescrizioneECodice("Special Player", Ruolo.ROLE_SPECIAL_PLAYER));
 			utenteServiceInstance.inserisciNuovo(classicUser2);
 			utenteServiceInstance.changeUserAbilitation(classicUser2.getId());
 		}
 		
 		Tavolo tavolo1 = Tavolo.builder()
-				.id(1L)
 				.esperienzaMinima(1)
 				.cifraMinima(100)
 				.denominazione("denominazione1")
