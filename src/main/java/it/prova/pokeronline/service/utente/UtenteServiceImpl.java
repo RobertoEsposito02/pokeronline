@@ -1,5 +1,6 @@
 package it.prova.pokeronline.service.utente;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -52,13 +53,16 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteInstance.setStato(StatoUtente.CREATO);
 		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
 		utenteInstance.setDateCreated(new Date());
+		utenteInstance.setDataRegistrazione(LocalDate.now());
+		utenteInstance.setEsperienzaAccumulata(0);
+		if(utenteInstance.getCreditoAccumulato() == null)
+			utenteInstance.setCreditoAccumulato(0);
 		repository.save(utenteInstance);
 	}
 
 	@Transactional
 	public void rimuovi(Long idToRemove) {
 		repository.deleteById(idToRemove);
-		;
 	}
 
 	public List<Utente> findByExample(Utente example) {
