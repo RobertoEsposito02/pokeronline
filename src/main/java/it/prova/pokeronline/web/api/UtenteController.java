@@ -23,6 +23,9 @@ import it.prova.pokeronline.dto.utente.UtenteDTO;
 import it.prova.pokeronline.model.Utente;
 import it.prova.pokeronline.security.dto.UtenteInfoJWTResponseDTO;
 import it.prova.pokeronline.service.utente.UtenteService;
+import it.prova.pokeronline.web.api.exception.IdNotNullForInsertException;
+import it.prova.pokeronline.web.api.exception.IdNullForUpdateException;
+import it.prova.pokeronline.web.api.exception.UtenteNotFoundException;
 
 @RestController
 @RequestMapping("/api/utente")
@@ -61,14 +64,18 @@ public class UtenteController {
 	
 	@GetMapping("/{id}")
 	public UtenteDTO findById(@PathVariable(required = true) Long id) {
-		return UtenteDTO.buildUtenteDTOFromModel(utenteService.caricaSingoloUtenteConRuoli(id));
+		Utente utenteDaCaricare = utenteService.caricaSingoloUtente(id);
+		if(utenteDaCaricare == null)
+			throw new UtenteNotFoundException("utente non trovato");
+		
+		return UtenteDTO.buildUtenteDTOFromModel(utenteDaCaricare);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void inserisci(@Valid @RequestBody UtenteDTO utente) {
-		if(utente.getId() != null)//DA SOSTITUIRE CON EXCEPTION CUSTOM
-			throw new RuntimeException("impossibile aggiungere un record se contenente id");
+		if(utente.getId() != null)
+			throw new IdNotNullForInsertException("impossibile aggiungere un record se contenente id");
 		
 		utenteService.inserisciNuovo(utente.buildUtenteModel(true));
 	}
@@ -76,8 +83,8 @@ public class UtenteController {
 	@PutMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@Valid @RequestBody UtenteDTO utente) {
-		if(utente.getId() == null)//DA SOSTITUIRE CON EXCEPTION CUSTOM	
-			throw new RuntimeException("impossibile aggiornare un record se non si inserisce l'id");
+		if(utente.getId() == null)	
+			throw new IdNullForUpdateException("impossibile aggiornare un record se non si inserisce l'id");
 		
 		utenteService.aggiorna(utente.buildUtenteModel(true));
 	}
@@ -86,8 +93,8 @@ public class UtenteController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable(required = true) Long id) {
 		Utente utenteDaEliminare = utenteService.caricaSingoloUtente(id);
-		if(utenteDaEliminare == null)//DA SOSTIUIRE CON EXCEPTION CUSTOM
-			throw new RuntimeException("utente non trovato");
+		if(utenteDaEliminare == null)
+			throw new UtenteNotFoundException("utente non trovato");
 		
 		utenteService.rimuovi(id);
 	}
