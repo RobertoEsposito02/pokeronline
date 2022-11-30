@@ -21,6 +21,7 @@ import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.service.tavolo.TavoloService;
 import it.prova.pokeronline.web.api.exception.IdNotNullForInsertException;
 import it.prova.pokeronline.web.api.exception.IdNullForUpdateException;
+import it.prova.pokeronline.web.api.exception.TavoloConGiocatoriException;
 import it.prova.pokeronline.web.api.exception.TavoloNotFoundException;
 
 
@@ -72,6 +73,8 @@ public class TavoloController {
 		Tavolo tavoloDaEliminare = tavoloService.caricaSingoloElementoEager(id);
 		if(tavoloDaEliminare == null)
 			throw new TavoloNotFoundException("tavolo non trovato");
+		if(tavoloDaEliminare.getUtentiAlTavolo().size() != 0)
+			throw new TavoloConGiocatoriException("impossibile eliminare un tavolo con giocatori presenti");
 		
 		tavoloService.rimuovi(id);
 	}
