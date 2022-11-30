@@ -39,9 +39,9 @@ public class TavoloServiceImpl implements TavoloService{
 	public void aggiorna(Tavolo tavoloInstance) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente utenteInSessionUtente = utenteRepository.findByUsername(username).orElse(null);
-		Tavolo tavoloDaEliminare = caricaSingoloElementoEager(tavoloInstance.getId());
+		Tavolo tavoloDaAggiornare = caricaSingoloElementoEager(tavoloInstance.getId());
 		if(utenteInSessionUtente.getRuoli().stream().anyMatch(r -> r.getCodice().equals(Ruolo.ROLE_SPECIAL_PLAYER))
-				&& !(utenteInSessionUtente.getId() == tavoloDaEliminare.getUtenteCheCreaIlTavolo().getId()))
+				&& !(utenteInSessionUtente.getId() == tavoloDaAggiornare.getUtenteCheCreaIlTavolo().getId()))
 			throw new TavoloNotYourException("impossibile aggiornare un tavolo non creato da te se hai ruolo special player");
 		
 		repository.save(tavoloInstance);
@@ -90,6 +90,14 @@ public class TavoloServiceImpl implements TavoloService{
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Utente utenteInSessionUtente = utenteRepository.findByUsername(username).orElse(null);
 		return repository.listAllByMyCreati(utenteInSessionUtente.getId());
+	}
+
+	@Override
+	public void inserisciNuovoDaApplication(Tavolo tavoloInstance) {
+		tavoloInstance.setDataCreazione(LocalDate.now());
+		if(tavoloInstance.getCifraMinima() == null)
+			tavoloInstance.setCifraMinima(0);
+		repository.save(tavoloInstance);
 	}
 	
 	

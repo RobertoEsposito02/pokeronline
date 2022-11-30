@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.pokeronline.model.StatoUtente;
+import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.model.Utente;
 import it.prova.pokeronline.repository.utente.UtenteRepository;
 
@@ -19,7 +21,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Autowired
 	private UtenteRepository repository;
-
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -95,6 +97,22 @@ public class UtenteServiceImpl implements UtenteService {
 
 	public Utente findByUsername(String username) {
 		return repository.findByUsername(username).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Utente aggiornaCredito(Integer creditoDaAumentare) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Utente utenteInSession = repository.findByUsername(username).orElse(null);
+		utenteInSession.setCreditoAccumulato(utenteInSession.getCreditoAccumulato()+creditoDaAumentare);
+		repository.save(utenteInSession);
+		return caricaSingoloUtenteConRuoli(utenteInSession.getId());
+	}
+
+	@Override
+	public Tavolo dammiLastGame() {
+		
+		return null;
 	}
 
 }

@@ -52,9 +52,8 @@ public class UtenteController {
 		List<String> ruoli = utenteLoggato.getRuoli().stream().map(item -> item.getCodice())
 				.collect(Collectors.toList());
 
-		//return ResponseEntity.ok(new UtenteInfoJWTResponseDTO(utenteLoggato.getDateCreated(),utenteLoggato.getNome(), utenteLoggato.getCognome(),
-		//		utenteLoggato.getUsername(), utenteLoggato.getEmail(), ruoli));
-		return null;
+		return ResponseEntity.ok(new UtenteInfoJWTResponseDTO(utenteLoggato.getDateCreated(),utenteLoggato.getNome(), utenteLoggato.getCognome(),
+				utenteLoggato.getUsername(), utenteLoggato.getEmail(), ruoli));
 	}
 	
 	@GetMapping
@@ -98,4 +97,14 @@ public class UtenteController {
 		
 		utenteService.rimuovi(id);
 	}
+	
+	@GetMapping("/aggiornaCredito/{credito}")
+	public UtenteDTO aggiornaCredito(@PathVariable Integer credito) {
+		return UtenteDTO.buildUtenteDTOFromModel(utenteService.aggiornaCredito(credito));
+	}
+	
+//	@GetMapping
+//	public TavoloDTO dammiUltimoGame() {
+//		
+//	}
 }

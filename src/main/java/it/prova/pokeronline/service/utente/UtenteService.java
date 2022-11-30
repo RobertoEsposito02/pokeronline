@@ -2,6 +2,7 @@ package it.prova.pokeronline.service.utente;
 
 import java.util.List;
 
+import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.model.Utente;
 
 public interface UtenteService {
@@ -13,6 +14,8 @@ public interface UtenteService {
 	public Utente caricaSingoloUtenteConRuoli(Long id);
 
 	public void aggiorna(Utente utenteInstance);
+	
+	public Utente aggiornaCredito(Integer cxreditoDaAumentare);
 
 	public void inserisciNuovo(Utente utenteInstance);
 
@@ -28,4 +31,5 @@ public interface UtenteService {
 
 	public Utente findByUsername(String username);
 
+	public Tavolo dammiLastGame();
 }

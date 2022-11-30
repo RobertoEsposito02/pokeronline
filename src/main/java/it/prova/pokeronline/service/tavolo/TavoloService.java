@@ -18,6 +18,8 @@ public interface TavoloService {
 	public void aggiorna(Tavolo tavoloInstance);
 
 	public void inserisciNuovo(Tavolo tavoloInstance);
+	
+	public void inserisciNuovoDaApplication(Tavolo tavoloInstance);
 
 	public void rimuovi(Long idToRemove);
 
