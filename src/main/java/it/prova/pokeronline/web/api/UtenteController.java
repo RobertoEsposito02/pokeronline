@@ -103,8 +103,4 @@ public class UtenteController {
 		return UtenteDTO.buildUtenteDTOFromModel(utenteService.aggiornaCredito(credito));
 	}
 	
-//	@GetMapping
-//	public TavoloDTO dammiUltimoGame() {
-//		
-//	}
 }

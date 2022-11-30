@@ -111,7 +111,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 			utenteServiceInstance.inserisciNuovo(classicUser2);
 			utenteServiceInstance.changeUserAbilitation(classicUser2.getId());
 		}
-		
+		 
 		Tavolo tavolo1 = Tavolo.builder()
 				.esperienzaMinima(1)
 				.cifraMinima(100)
@@ -120,6 +120,7 @@ public class PokeronlineApplication implements CommandLineRunner {
 				.utenteCheCreaIlTavolo(utenteServiceInstance.listAllUtenti().get(0))
 				.build();
 		tavoloServiceInstance.inserisciNuovoDaApplication(tavolo1);
-	}
+		
+	} 
 
 }

@@ -2,7 +2,6 @@ package it.prova.pokeronline.service.utente;
 
 import java.util.List;
 
-import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.model.Utente;
 
 public interface UtenteService {
@@ -31,5 +30,4 @@ public interface UtenteService {
 
 	public Utente findByUsername(String username);
 
-	public Tavolo dammiLastGame();
 }

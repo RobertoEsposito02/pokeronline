@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.pokeronline.model.StatoUtente;
-import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.model.Utente;
 import it.prova.pokeronline.repository.utente.UtenteRepository;
 
@@ -107,12 +106,6 @@ public class UtenteServiceImpl implements UtenteService {
 		utenteInSession.setCreditoAccumulato(utenteInSession.getCreditoAccumulato()+creditoDaAumentare);
 		repository.save(utenteInSession);
 		return caricaSingoloUtenteConRuoli(utenteInSession.getId());
-	}
-
-	@Override
-	public Tavolo dammiLastGame() {
-		
-		return null;
 	}
 
 }
