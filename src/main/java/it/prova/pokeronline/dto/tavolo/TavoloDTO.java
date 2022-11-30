@@ -40,9 +40,11 @@ public class TavoloDTO {
 				.cifraMinima(cifraMinima)
 				.denominazione(denominazione)
 				.dataCreazione(dataCreazione)
-				.utenteCheCreaIlTavolo(utenteCheCreaIlTavolo.buildUtenteModel(true))
 				.utentiAlTavolo(UtenteDTO.createUtenteListModelFromDTO(utentiAlTavolo))
 				.build();
+		if(utenteCheCreaIlTavolo != null)
+			result.setUtenteCheCreaIlTavolo(utenteCheCreaIlTavolo.buildUtenteModel(true));
+		
 		return result;
 	}
 	
