@@ -8,8 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import it.prova.pokeronline.model.Ruolo;
+import it.prova.pokeronline.model.Tavolo;
 import it.prova.pokeronline.model.Utente;
 import it.prova.pokeronline.service.ruolo.RuoloService;
+import it.prova.pokeronline.service.tavolo.TavoloService;
 import it.prova.pokeronline.service.utente.UtenteService;
 
 @SpringBootApplication
@@ -19,6 +21,8 @@ public class PokeronlineApplication implements CommandLineRunner {
 	private RuoloService ruoloServiceInstance;
 	@Autowired
 	private UtenteService utenteServiceInstance;
+	@Autowired
+	private TavoloService tavoloServiceInstance;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PokeronlineApplication.class, args);
@@ -103,6 +107,16 @@ public class PokeronlineApplication implements CommandLineRunner {
 			utenteServiceInstance.inserisciNuovo(classicUser2);
 			utenteServiceInstance.changeUserAbilitation(classicUser2.getId());
 		}
+		
+		Tavolo tavolo1 = Tavolo.builder()
+				.id(1L)
+				.esperienzaMinima(1)
+				.cifraMinima(100)
+				.denominazione("denominazione1")
+				.dataCreazione(LocalDate.now())
+				.utenteCheCreaIlTavolo(utenteServiceInstance.listAllUtenti().get(0))
+				.build();
+		tavoloServiceInstance.inserisciNuovo(tavolo1);
 	}
 
 }
